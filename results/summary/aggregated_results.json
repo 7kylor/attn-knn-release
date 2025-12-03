@@ -14,11 +14,31 @@
     }
   },
   "final_results_experiment_7": {
-    "uniform_knn": {"accuracy": 0.9153, "ece": 0.0796, "nll": 1.225},
-    "distance_knn": {"accuracy": 0.9152, "ece": 0.0783, "nll": 1.225},
-    "attn_knn": {"accuracy": 0.9155, "ece": 0.0811, "nll": 1.236},
-    "attn_knn_tta": {"accuracy": 0.9099, "ece": 0.0267, "nll": 0.513},
-    "cnn_baseline": {"accuracy": 0.9651, "ece": 0.0253, "nll": 0.184}
+    "uniform_knn": {
+      "accuracy": 0.9153,
+      "ece": 0.0796,
+      "nll": 1.225
+    },
+    "distance_knn": {
+      "accuracy": 0.9152,
+      "ece": 0.0783,
+      "nll": 1.225
+    },
+    "attn_knn": {
+      "accuracy": 0.9155,
+      "ece": 0.0811,
+      "nll": 1.236
+    },
+    "attn_knn_tta": {
+      "accuracy": 0.9099,
+      "ece": 0.0267,
+      "nll": 0.513
+    },
+    "cnn_baseline": {
+      "accuracy": 0.9651,
+      "ece": 0.0253,
+      "nll": 0.184
+    }
   },
   "noise_robustness_30pct": {
     "uniform_knn_drop": "0.04%",

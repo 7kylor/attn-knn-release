@@ -83,12 +83,12 @@
 
 ## Claim Validation
 
-| Claim                   | Status        | Evidence                                       |
-| ----------------------- | ------------- | ---------------------------------------------- |
-| Calibration Improvement | PARTIAL       | Only with TTA (67% ECE reduction)              |
+| Claim                   | Status          | Evidence                                                |
+| ----------------------- | --------------- | ------------------------------------------------------- |
+| Calibration Improvement | PARTIAL         | Only with TTA (67% ECE reduction)                       |
 | Robustness              | **INVALIDATED** | Attention is LESS robust to noise (1.05% drop vs 0.04%) |
-| Accuracy Improvement    | **INVALIDATED** | +0.02% is within noise margin                  |
-| Compute Overhead        | VALIDATED     | <1ms additional per query                      |
+| Accuracy Improvement    | **INVALIDATED** | +0.02% is within noise margin                           |
+| Compute Overhead        | VALIDATED       | <1ms additional per query                               |
 
 ---
 
