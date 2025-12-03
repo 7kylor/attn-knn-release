@@ -54,8 +54,6 @@ This work demonstrates that **calibration can be significantly improved** throug
 ```
 attn-knn-release/
 ├── README.md                    # This file
-├── EXPERIMENTS.md               # Detailed experiment documentation
-├── HONEST_ASSESSMENT.md         # Honest limitations and findings
 ├── CHANGELOG.md                 # Version history
 ├── LICENSE                      # MIT License
 ├── requirements.txt             # Dependencies
@@ -81,7 +79,12 @@ attn-knn-release/
 ├── docs/                        # Documentation
 │   ├── method.md                # Method description
 │   ├── related_work.md          # Related work
-│   └── future_directions.md     # Future directions
+│   ├── future_directions.md     # Future directions
+│   ├── experiments.md           # Detailed experiment documentation
+│   ├── honest_assessment.md     # Honest limitations and findings
+│   ├── research_narrative.md    # Complete chronological research story
+│   ├── research_summary.md      # Executive summary with key results
+│   └── architecture_diagrams.md # ASCII art architecture diagrams
 │
 └── data/                        # Datasets (download separately)
     ├── adult/                   # UCI Adult dataset (census income prediction)
@@ -255,4 +258,4 @@ MIT License - See LICENSE file for details.
 
 ## Acknowledgments
 
-This research was conducted with honest reporting of both successes and limitations. See HONEST_ASSESSMENT.md for detailed analysis.
+This research was conducted with honest reporting of both successes and limitations. See docs/honest_assessment.md for detailed analysis.
