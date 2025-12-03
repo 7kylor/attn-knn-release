@@ -2,6 +2,8 @@
 
 This document provides an unfiltered evaluation of the Attn-KNN project, including limitations, failed hypotheses, and recommendations.
 
+**STATUS: PROJECT CONCLUDED** - December 2025. No further investigation needed.
+
 ---
 
 ## What I Claimed
@@ -18,8 +20,8 @@ This document provides an unfiltered evaluation of the Attn-KNN project, includi
 
 | Condition       | ECE Improvement                     |
 | --------------- | ----------------------------------- |
-| Attention alone | NONE (0.1300 vs 0.1297 for uniform) |
-| Attention + TTA | YES (-78%, 0.0283 vs 0.1297)        |
+| Attention alone | NONE (0.0811 vs 0.0796 for uniform) |
+| Attention + TTA | YES (-66%, 0.0267 vs 0.0796)        |
 
 **Honest Truth**: The calibration improvement comes from TTA, not attention. Attention alone provides no calibration benefit.
 
@@ -27,19 +29,24 @@ This document provides an unfiltered evaluation of the Attn-KNN project, includi
 
 **Status: FALSE**
 
-| Method      | Best Accuracy  |
-| ----------- | -------------- |
-| Uniform kNN | 89.69% (Exp 4) |
-| Attn-KNN    | 89.70% (Exp 4) |
-| Difference  | +0.01%         |
+| Method      | Best Accuracy (Final Run) |
+| ----------- | ------------------------- |
+| Uniform kNN | 91.53%                    |
+| Attn-KNN    | 91.55%                    |
+| Difference  | +0.02%                    |
 
-**Honest Truth**: Attention provides negligible accuracy improvement. The +0.01% difference is within noise margin.
+**Honest Truth**: Attention provides negligible accuracy improvement. The +0.02% difference is within noise margin.
 
 ### Claim 3: Robustness to Noise
 
-**Status: TRUE (but not unique)**
+**Status: FALSE (attention is WORSE)**
 
-All kNN methods (uniform, distance, attention) show similar robustness to 30% label noise. This is a property of kNN, not attention.
+Final run results with 30% label noise:
+
+- Uniform kNN: 91.49% (drop: 0.04%)
+- Attn-KNN: 90.50% (drop: 1.05%)
+
+**Honest Truth**: Attention is actually LESS robust to label noise than uniform kNN.
 
 ### Claim 4: Minimal Compute Overhead
 
@@ -188,6 +195,22 @@ The codebase is well-structured for experimentation. Consider:
 **What I did not achieve**: Evidence that learned attention beats simple baselines.
 
 **Honest conclusion**: Attention-weighted kNN is not significantly better than distance-weighted kNN. The calibration improvements in our best results come from TTA, not attention.
+
+---
+
+## Final Results (December 2025)
+
+| Method            | Accuracy | ECE    | NLL   |
+| ----------------- | -------- | ------ | ----- |
+| Uniform kNN       | 91.53%   | 0.0796 | 1.225 |
+| Distance kNN      | 91.52%   | 0.0783 | 1.225 |
+| Attn-KNN          | 91.55%   | 0.0811 | 1.236 |
+| Attn-KNN + TTA    | 90.99%   | 0.0267 | 0.513 |
+| CNN (Upper Bound) | 96.51%   | 0.0253 | 0.184 |
+
+**Recommendation**: Use distance-weighted kNN with TTA. Attention adds complexity without benefit.
+
+**Project Status**: CONCLUDED. No further investigation needed.
 
 ---
 

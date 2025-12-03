@@ -1,17 +1,29 @@
 {
   "project": "Attn-KNN",
-  "version": "0.6",
-  "date": "2025-11",
-  "status": "PARTIALLY_VALIDATED",
+  "version": "1.0",
+  "date": "2025-12",
+  "status": "CONCLUDED",
+  "conclusion": "Attention provides no meaningful benefit over distance-weighted kNN. TTA improves calibration. Project concluded.",
   "best_results": {
-    "experiment": 5,
+    "experiment": 7,
     "method": "Attn-KNN + TTA",
     "metrics": {
-      "accuracy": 0.8720,
-      "f1_macro": 0.8727,
-      "ece": 0.0283,
-      "nll": 0.967
+      "accuracy": 0.9099,
+      "ece": 0.0267,
+      "nll": 0.513
     }
+  },
+  "final_results_experiment_7": {
+    "uniform_knn": {"accuracy": 0.9153, "ece": 0.0796, "nll": 1.225},
+    "distance_knn": {"accuracy": 0.9152, "ece": 0.0783, "nll": 1.225},
+    "attn_knn": {"accuracy": 0.9155, "ece": 0.0811, "nll": 1.236},
+    "attn_knn_tta": {"accuracy": 0.9099, "ece": 0.0267, "nll": 0.513},
+    "cnn_baseline": {"accuracy": 0.9651, "ece": 0.0253, "nll": 0.184}
+  },
+  "noise_robustness_30pct": {
+    "uniform_knn_drop": "0.04%",
+    "attn_knn_drop": "1.05%",
+    "conclusion": "Attention is LESS robust to noise"
   },
   "experiments": {
     "experiment_1-3": {
@@ -231,22 +243,23 @@
     }
   },
   "key_findings": [
-    "TTA provides 78% ECE reduction (0.1297 -> 0.0283)",
-    "Attention alone does not beat uniform or distance kNN",
-    "All kNN methods are robust to 30% label noise",
-    "8-9% accuracy gap to CNN upper bound",
+    "TTA provides 67% ECE reduction (0.0811 -> 0.0267)",
+    "Attention provides only +0.02% accuracy improvement (noise level)",
+    "Attention is LESS robust to label noise than uniform kNN (1.05% vs 0.04% drop)",
+    "5% accuracy gap to CNN upper bound remains",
     "k parameter has minimal impact on accuracy"
   ],
   "claim_validation": {
-    "calibration_improvement": "PARTIAL - Only with TTA",
-    "accuracy_improvement": "MARGINAL - <0.5%",
-    "robustness": "VALIDATED",
+    "calibration_improvement": "PARTIAL - Only with TTA, not attention",
+    "accuracy_improvement": "INVALIDATED - +0.02% is within noise",
+    "robustness": "INVALIDATED - Attention worse under noise",
     "compute_overhead": "VALIDATED - <1ms"
   },
   "recommendations": [
-    "Use TTA for calibration-critical applications",
-    "Attention adds complexity without clear accuracy benefit",
-    "Consider distance-weighted kNN as simpler alternative",
-    "Focus on embedding quality rather than attention mechanism"
-  ]
+    "Use distance-weighted kNN with TTA for production",
+    "Attention adds complexity without benefit",
+    "Focus on embedding quality rather than attention mechanism",
+    "No further investigation of attention-weighted kNN needed"
+  ],
+  "project_status": "CONCLUDED - December 2025"
 }

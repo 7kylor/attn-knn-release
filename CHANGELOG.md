@@ -4,6 +4,55 @@ All notable changes to the Attn-KNN project are documented here.
 
 ## Version History
 
+### v1.0 - Final Release (Experiment 7) [CONCLUDED]
+
+**Date**: December 2025
+
+**Status**: PROJECT CONCLUDED - No further investigation needed.
+
+**Configuration**:
+
+```yaml
+backbone: ResNet50
+embed_dim: 256
+num_heads: 4
+epochs: 50
+batch_size: 512
+k_train: 16
+k_eval: 16
+mixup_alpha: 0.4
+contrastive_weight: 0.5
+hard_negative_weight: 2.0
+tta_augments: 5
+```
+
+**Final Results**:
+
+| Method            | Accuracy | ECE    | NLL   |
+| ----------------- | -------- | ------ | ----- |
+| Uniform kNN       | 91.53%   | 0.0796 | 1.225 |
+| Distance kNN      | 91.52%   | 0.0783 | 1.225 |
+| Attn-KNN          | 91.55%   | 0.0811 | 1.236 |
+| Attn-KNN + TTA    | 90.99%   | 0.0267 | 0.513 |
+| CNN (Upper Bound) | 96.51%   | 0.0253 | 0.184 |
+
+**Noise Robustness** (30% label noise):
+
+- Uniform kNN: 91.49% (drop: 0.04%)
+- Attn-KNN: 90.50% (drop: 1.05%)
+
+**Final Conclusions**:
+
+1. Attention provides negligible accuracy improvement (+0.02% over uniform)
+2. TTA achieves best calibration (ECE: 0.0267, 66% improvement)
+3. Attention is LESS robust to label noise than uniform kNN
+4. 5% accuracy gap to CNN upper bound remains
+5. Distance-weighted kNN is recommended over attention for simplicity
+
+**Recommendation**: Use distance-weighted kNN with TTA for production.
+
+---
+
 ### v0.6 - Final Validation (Experiment 6)
 
 **Date**: November 2025
@@ -21,7 +70,7 @@ All notable changes to the Attn-KNN project are documented here.
 
 ---
 
-### v0.5 - Enhanced Training (Experiment 5) [BEST RESULTS]
+### v0.5 - Enhanced Training (Experiment 5)
 
 **Date**: November 2025
 

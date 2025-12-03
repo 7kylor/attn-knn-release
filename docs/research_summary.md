@@ -4,33 +4,42 @@
 
 **Research Question**: Can learned attention over neighbors improve calibration and robustness versus uniform and distance-weighted kNN, with minimal compute overhead?
 
-**Answer**: Partially validated. Attention alone provides marginal benefits, but Test-Time Augmentation (TTA) combined with attention achieves significant calibration improvements (78% ECE reduction).
+**Answer**: NO. Attention alone provides no meaningful benefits. Test-Time Augmentation (TTA) achieves calibration improvements, but this is independent of attention.
 
-**Status**: PARTIALLY VALIDATED  
-**Timeline**: November 2025  
-**Experiments**: 6 major iterations
+**Status**: CONCLUDED - No further investigation needed  
+**Timeline**: November - December 2025  
+**Experiments**: 7 major iterations
 
 ---
 
 ## Key Results
 
-### Best Performance (Experiment 5)
+### Final Performance (Experiment 7 - December 2025)
 
-| Method             | Accuracy   | ECE        | NLL       | F1-Macro   |
-| ------------------ | ---------- | ---------- | --------- | ---------- |
-| Uniform kNN        | 86.82%     | 0.1297     | 2.053     | 86.78%     |
-| Distance kNN       | 86.85%     | 0.1099     | 2.054     | 86.81%     |
-| Attn-KNN           | 86.85%     | 0.1300     | 2.054     | 86.81%     |
-| **Attn-KNN + TTA** | **87.20%** | **0.0283** | **0.967** | **87.27%** |
-| CNN Baseline       | 95.12%     | 0.0685     | 0.242     | 95.11%     |
+| Method             | Accuracy   | ECE        | NLL       |
+| ------------------ | ---------- | ---------- | --------- |
+| Uniform kNN        | 91.53%     | 0.0796     | 1.225     |
+| Distance kNN       | 91.52%     | 0.0783     | 1.225     |
+| Attn-KNN           | 91.55%     | 0.0811     | 1.236     |
+| **Attn-KNN + TTA** | 90.99%     | **0.0267** | **0.513** |
+| CNN Baseline       | **96.51%** | 0.0253     | 0.184     |
 
 ### TTA Impact
 
 | Metric   | Without TTA | With TTA | Improvement |
 | -------- | ----------- | -------- | ----------- |
-| Accuracy | 86.85%      | 87.20%   | +0.35%      |
-| ECE      | 0.1300      | 0.0283   | **-78%**    |
-| NLL      | 2.054       | 0.967    | **-53%**    |
+| Accuracy | 91.55%      | 90.99%   | -0.56%      |
+| ECE      | 0.0811      | 0.0267   | **-67%**    |
+| NLL      | 1.236       | 0.513    | **-58%**    |
+
+### Noise Robustness (30% label noise)
+
+| Method      | Accuracy Drop |
+| ----------- | ------------- |
+| Uniform kNN | 0.04%         |
+| Attn-KNN    | 1.05%         |
+
+**Finding**: Attention is LESS robust to noise than uniform kNN.
 
 ---
 
@@ -50,7 +59,7 @@
 - **Result**: +1.08% accuracy (89.70%) but no attention advantage
 - **Finding**: Architectural improvements don't create separation
 
-### Experiment 5: Enhanced Training with TTA [BEST]
+### Experiment 5: Enhanced Training with TTA
 
 - **Goal**: Maximize calibration
 - **Changes**: TTA, MixUp, label smoothing, optimized config
@@ -62,16 +71,24 @@
 - **Goal**: Reproduce Experiment 5
 - **Result**: Pattern confirmed, TTA consistently improves calibration
 
+### Experiment 7: Final Release [CONCLUDED]
+
+- **Goal**: Best possible results with ResNet50
+- **Config**: ResNet50, 256-dim, 4-heads, 50 epochs
+- **Result**: 91.55% accuracy, 0.0267 ECE (with TTA)
+- **Discovery**: Attention is LESS robust to noise than uniform kNN
+- **Conclusion**: Project concluded, no further investigation needed
+
 ---
 
 ## Claim Validation
 
-| Claim                   | Status    | Evidence                                      |
-| ----------------------- | --------- | --------------------------------------------- |
-| Calibration Improvement | VALIDATED | 78% ECE reduction with TTA (0.1297 to 0.0283) |
-| Robustness              | VALIDATED | Maintains performance under 30% label noise   |
-| Accuracy Improvement    | MARGINAL  | +0.03% to +0.38% over uniform kNN             |
-| Compute Overhead        | VALIDATED | <1ms additional per query                     |
+| Claim                   | Status        | Evidence                                       |
+| ----------------------- | ------------- | ---------------------------------------------- |
+| Calibration Improvement | PARTIAL       | Only with TTA (67% ECE reduction)              |
+| Robustness              | **INVALIDATED** | Attention is LESS robust to noise (1.05% drop vs 0.04%) |
+| Accuracy Improvement    | **INVALIDATED** | +0.02% is within noise margin                  |
+| Compute Overhead        | VALIDATED     | <1ms additional per query                      |
 
 ---
 
@@ -195,17 +212,17 @@ tta_augments: 5
 
 ## Future Directions
 
-### High Priority
+**Project Status: CONCLUDED** - No further investigation planned.
 
-1. Larger scale evaluation (ImageNet, fine-grained)
-2. Transformer embeddings (CLIP, DINO)
-3. Calibration-first training objective
+### If Others Want to Extend
 
-### Pivot Options
+1. Test on different domains (tabular, NLP)
+2. Try transformer embeddings (CLIP, DINO)
+3. Focus on TTA optimization rather than attention
 
-1. Calibrated Retrieval Confidence (RAG systems)
-2. Uncertainty Quantification for kNN
-3. kNN for Few-Shot Learning
+### Recommendation
+
+Use distance-weighted kNN with TTA for production. Attention adds complexity without meaningful benefit.
 
 ---
 
@@ -230,13 +247,14 @@ Started with hypothesis about attention improving kNN. Through systematic experi
 
 ## Quick Stats
 
-- **Experiments**: 6 major iterations
-- **Best ECE**: 0.0283 (78% reduction)
-- **Best Accuracy**: 87.20% (with TTA)
-- **Gap to CNN**: 7.92%
-- **Noise Tolerance**: 30% label noise
+- **Experiments**: 7 major iterations
+- **Best ECE**: 0.0267 (67% reduction with TTA)
+- **Best Accuracy**: 91.55% (Attn-KNN)
+- **Gap to CNN**: 4.96%
+- **Noise Tolerance**: Uniform kNN better than attention
 - **Compute Overhead**: <1ms per query
 - **k Robustness**: Stable across k ∈ [1, 50]
+- **Status**: CONCLUDED - December 2025
 
 ---
 
