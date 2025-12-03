@@ -1,0 +1,17 @@
+\begin{table}[h]
+  \centering
+  \begin{tabular}{lrrrr}
+    \toprule
+    Method & Accuracy (\%) & F1 (\%) & NLL & ECE \\
+    \midrule
+    Uniform kNN & 85.57 & 85.58 & 2.028 & 0.1336 \\
+    Distance kNN & 85.55 & 85.55 & 2.028 & 0.1169 \\
+    Attn-KNN (Ours) & 85.48 & 85.47 & 2.058 & 0.1359 \\
+    Attn-KNN + TTA & 85.54 & 85.63 & 0.931 & 0.0379 \\
+    Attn-KNN + k-Ensemble & 85.46 & 85.45 & 2.044 & 0.1361 \\
+    CNN (Upper Bound) & 94.97 & 94.97 & 0.247 & 0.0726 \\
+    \bottomrule
+  \end{tabular}
+  \caption{CIFAR-10 Main Results - Attn-KNN vs Baselines}
+  \label{tab:main}
+\end{table}

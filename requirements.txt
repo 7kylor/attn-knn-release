@@ -1,0 +1,54 @@
+# Core ML/DL libraries
+torch>=2.9.0
+torchvision>=0.24.0
+numpy>=2.3.0
+scipy>=1.16.0
+
+# FAISS for efficient kNN search (CPU version for macOS compatibility)
+faiss-cpu>=1.13.0
+
+# Scikit-learn for metrics and preprocessing
+scikit-learn>=1.7.0
+
+# Data handling
+pandas>=2.3.0
+
+# Visualization
+matplotlib>=3.10.0
+seaborn>=0.13.0
+
+# Progress bars
+tqdm>=4.67.0
+
+# Jupyter/IPython for notebooks
+ipykernel>=7.1.0
+ipython>=9.7.0
+ipywidgets>=8.1.0
+jupyter-client>=8.6.0
+jupyter-core>=5.9.0
+jupyterlab-widgets>=3.0.0
+notebook>=7.0.0
+
+# Notebook conversion and export
+nbconvert>=7.16.0
+nbformat>=5.10.0
+
+# HuggingFace datasets (used in notebooks)
+datasets>=4.4.0
+transformers>=4.57.0
+huggingface-hub>=0.36.0
+safetensors>=0.7.0
+tokenizers>=0.22.0
+pyarrow>=22.0.0
+
+# Evaluation metrics
+evaluate>=0.4.0
+
+# UMAP for visualization (optional - may have LLVM compatibility issues on some systems)
+# If installation fails, you can skip this and comment out umap imports in visualize.py
+# umap-learn>=0.5.6  # Commented out due to LLVM 21 compatibility issues - install separately if needed
+
+# Utilities
+pillow>=12.0.0
+pyyaml>=6.0.0
+requests>=2.32.0

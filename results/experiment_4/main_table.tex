@@ -1,0 +1,15 @@
+\begin{table}[h]
+  \centering
+  \begin{tabular}{lrrrr}
+    \toprule
+    Method & Acc & F1 & NLL & ECE \\
+    \midrule
+    Uniform kNN & 89.69 & 89.66 & 0.964 & 0.0243 \\
+    Distance kNN & 89.70 & 89.66 & 0.964 & 0.0566 \\
+    Attn-KNN (Ours) & 89.70 & 89.66 & 0.964 & 0.0578 \\
+    CNN (Upper Bound) & 94.94 & 94.93 & 0.258 & 0.0718 \\
+    \bottomrule
+  \end{tabular}
+  \caption{CIFAR-10 Main Results}
+  \label{tab:main}
+\end{table}

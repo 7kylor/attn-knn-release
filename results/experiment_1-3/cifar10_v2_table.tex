@@ -1,0 +1,15 @@
+\begin{table}[h]
+  \centering
+  \begin{tabular}{lrrrr}
+    \toprule
+    Method & Accuracy & F1-Macro & NLL & ECE \\
+    \midrule
+    Uniform kNN & 89.64\% & 89.61\% & 0.917 & 0.0259 \\
+    Attn-KNN (no TTA) & 89.62\% & 89.58\% & 0.917 & 0.0547 \\
+    Attn-KNN (TTA) & 90.91\% & 90.88\% & 0.509 & 0.0853 \\
+    Attn-KNN Ensemble & 90.95\% & 90.92\% & 0.432 & 0.0842 \\
+    \bottomrule
+  \end{tabular}
+  \caption{CIFAR-10 Results - Attn-KNN v2}
+  \label{tab:cifar10_v2}
+\end{table}
