@@ -84,8 +84,69 @@ attn-knn-release/
 │   └── future_directions.md     # Future directions
 │
 └── data/                        # Datasets (download separately)
-    └── cifar-10-batches-py/     # CIFAR-10 (auto-downloaded)
+    ├── adult/                   # UCI Adult dataset (census income prediction)
+    ├── cifar-10-batches-py/     # CIFAR-10 (32x32 color images, 10 classes)
+    ├── cifar-100-python/        # CIFAR-100 (32x32 color images, 100 classes)
+    ├── ImageNet/                # ImageNet dataset (large-scale image classification)
+    ├── iris/                    # Iris flower dataset (classification)
+    ├── MNIST/                   # MNIST handwritten digits (28x28 grayscale)
+    └── wine-quality/            # Wine quality dataset (regression/classification)
 ```
+
+---
+
+## Datasets
+
+The repository contains the following datasets in the `data/` folder:
+
+### Image Classification Datasets
+
+- **CIFAR-10** (`cifar-10-batches-py/`)
+
+  - 32×32 color images, 10 classes
+  - 50,000 training + 10,000 test images
+  - **Status**: Used in experiments (Experiment 1-6)
+  - Auto-downloads if not present
+
+- **CIFAR-100** (`cifar-100-python/`)
+
+  - 32×32 color images, 100 classes
+  - 50,000 training + 10,000 test images
+  - **Status**: Available, not yet used in experiments
+
+- **ImageNet** (`ImageNet/`)
+
+  - Large-scale image classification dataset
+  - Organized in train.X1-X4 and val.X subdirectories
+  - **Status**: Available, not yet used in experiments
+
+- **MNIST** (`MNIST/`)
+  - 28×28 grayscale handwritten digits
+  - 60,000 training + 10,000 test images
+  - 10 classes (digits 0-9)
+  - **Status**: Available, not yet used in experiments
+
+### Tabular/Structured Datasets
+
+- **Adult** (`adult/`)
+
+  - UCI Adult dataset for census income prediction
+  - Binary classification (income >50K or ≤50K)
+  - Mixed categorical and numerical features
+  - **Status**: Available, not yet used in experiments
+
+- **Iris** (`iris/`)
+
+  - Classic flower classification dataset
+  - 150 samples, 4 features, 3 classes
+  - **Status**: Available, not yet used in experiments
+
+- **Wine Quality** (`wine-quality/`)
+  - Wine quality prediction dataset
+  - Regression/classification task
+  - **Status**: Available, not yet used in experiments
+
+**Note**: The `data/` folder is excluded from git tracking (see `.gitignore`). Datasets should be downloaded separately or will be auto-downloaded by the code when needed.
 
 ---
 
